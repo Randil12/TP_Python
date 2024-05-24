@@ -14,17 +14,25 @@ class Team(db.Model):
     team_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60) , nullable=False)
     
-
+#Création de la table Player
 class Player(db.Model):
     player_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('team.team_id'), nullable=False)
 
+#Création de la table Transfert
+class Transfert(db.Model):
+    transfert_id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=False)
+    team_origine_id = db.Column(db.Integer, db.ForeignKey('team.team_id'), nullable=False)
+    new_team_id = db.Column(db.Integer, db.ForeignKey('team.team_id'), nullable=False)
+
 #Retourne toutes les teams 
 @app.route('/get_all_teams' , methods=['GET'])
 def get_teams():
     AllTeams = Team.query.all()
-    return jsonify([{'id': team.id, 'name': team.name} for team in AllTeams])
+    teams = [{'id': team.team_id, 'name': team.name} for team in AllTeams]
+    return jsonify(teams)
 
 #Créé une team
 @app.route('/create_team' , methods=['POST'])
@@ -36,6 +44,28 @@ def create_team():
     db.session.add(team)
     db.session.commit()
     return jsonify({'id': team.team_id})
+
+#Retourne tous les joueurs 
+@app.route('/get_all_players' , methods=['GET'])
+def get_players():
+    AllPlayers = Player.query.all()
+    Players = [{'id' : player.player_id , 'team_id': player.team_id, 'name': player.name} for player in AllPlayers]
+    return jsonify(Players)
+
+#Créé un joueur
+@app.route('/create_player' , methods=['POST'])
+def create_player():
+    AllTeams = Team.query.all()
+    for team in AllTeams :
+        if request.json.get('team_id') == team.team_id :
+            player = Player(name=request.json.get('name') , team_id=request.json.get('team_id'))
+        
+    
+    db.session.add(player)
+    db.session.commit()
+    return jsonify({'player_id': player.player_id})
+
+
 
 
 with app.app_context():
