@@ -66,7 +66,21 @@ def create_player():
     return jsonify({'player_id': player.player_id})
 
 
-
+@app.route('/transfert_player' , methods=['POST'])
+def Transfert_Player_To_Another_Team():
+    AllTeams = Team.query.all()
+    AllPlayers = Player.query.all()
+    
+    for idx , player in enumerate(AllPlayers) :
+        if request.json.get('player_id') == player.player_id :
+            for team in AllTeams : 
+                if request.json.get('new_team_id') == team.team_id:
+                    tfert = Transfert(player_id=request.json.get('player_id') ,team_origine_id=Player.query.get(idx+1).team_id ,new_team_id=request.json.get('new_team_id'))
+        
+    
+    db.session.add(tfert)
+    db.session.commit()
+    return jsonify({'tfert_id': tfert.player_id , 'new_team_id' : tfert.new_team_id})
 
 with app.app_context():
     db.create_all()
