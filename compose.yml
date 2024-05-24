@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build: . 
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: ubuntu/postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: TP
+    ports:
+      - "5432:5432"
+    
