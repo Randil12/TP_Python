@@ -15,6 +15,11 @@ Installé docker si ce n'est pas déjà fait sinon allez dans le dossier , ouvre
 
 docker compose up 
 
+Dans un autre terminal dans le même dossier installer les dépendances suivantes : 
+    - flask : pip install flask 
+    - flask_sqlalchemy : pip install flask_sqlalchemy
+    - psycopg2 : pip install psycopg2
+
 # Etape 3 : 
 
 Lancer le app.py
