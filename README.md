@@ -4,6 +4,18 @@ TP python avancée
 
 Pour lancer le programme veuillez suivre les étapes suivantes : 
 
+# Etape 1 : 
+
+
+git clone https://github.com/Randil12/TP_Python.git
+
+# Etape 2 : 
+
+Installé docker si ce n'est pas déjà fait sinon allez dans le dossier , ouvrez un terminal et lancer la commande suivante : 
+
+docker compose up 
+
+# Etape 3 : 
 
 
 
@@ -20,11 +32,3 @@ Pour lancer le programme veuillez suivre les étapes suivantes :
 
 
 
-
-
-Source : 
-Exercice Docker
-https://stackoverflow.com/questions/2633218/how-can-i-select-all-rows-with-sqlalchemy
-https://thepythoncode.com/article/building-crud-app-with-flask-and-sqlalchemy
-https://stackoverflow.com/questions/73961938/flask-sqlalchemy-db-create-all-raises-runtimeerror-working-outside-of-applicat
-https://stackoverflow.com/questions/18807322/sqlalchemy-foreign-key-relationship-attributes
